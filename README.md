@@ -25,5 +25,5 @@ Else the _wt_ of item _n_ is greater than the _cap_, so the item _n_ cannot be i
 The idea of this solution is to find the largest value of items while still keeping the weight of these items at or under the knapsack capacity weight. These steps are iterated through until every item and its value is considered in the knapsack, and this breakdown of the overall problem into subproblems and storage of their results in the array so they don't need to be solved more than once causes this solution to be a dynamic programming one. The time complexity of this algorihtm is O(nW), for the algorithm is repeated for the number of items _n_ and for the capacity of the knapsack _W_. This is also the array that is returned at the end of the solution.
 
 
-The following is a screenshot of the resulting packing list when the _knap.txt_ file included in this repository is run in the program solution:
+The following is a screenshot of the resulting packing list when the _packingList.txt_ file included in this repository is run in the program solution:
 ![Running](Running.PNG)
