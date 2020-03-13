@@ -18,7 +18,7 @@ To find this optimal subset from _n_ items, the program builds a two-dimentional
 ```
 If there are no items or weights, then for that position the array is 0
 Else if the _wt_ of the item is less than or equal to the weight capacity
-  then find if the maximum _val_ we can obtain without the item _i_ or with item _i_, whichever is larger
+  then find the maximum _val_ we can obtain without the item _i_ or with item _i_, whichever is larger
 Else the _wt_ of item _n_ is greater than the _cap_, so the item _n_ cannot be included
 ```
 The idea of this solution is to find the largest value of items while still keeping the weight of these items at or under the knapsack capacity weight. These steps are iterated through until every item and its value is considered in the knapsack, and this breakdown of the overall problem into subproblems and storage of their results in the array so they don't need to be solved more than once causes this solution to be a dynamic programming one. The time complexity of this algorithm is O(nW), for the algorithm is repeated for the number of items _n_ and for the capacity of the knapsack _W_. This is also the array that is returned at the end of the solution.
