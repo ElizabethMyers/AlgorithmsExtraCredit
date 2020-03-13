@@ -14,7 +14,29 @@ For our problem, let us look at a specific real-world application of this proble
 
 ### Solution
 *Research for a heuristic(approximate) solution of the problem, describe the solution, and implement the solution with a real world input.*
-The heuristic solution for the 0-1 Knapsack Problem that I will explore is the dynamic programming solution. 
+The heuristic solution for the 0-1 Knapsack Problem that I will explore is the dynamic programming solution. In this solution, there are _n_ items given with each item having two integer array values, _val_[0..n-1] for the value of the item and _wt_[0..n-1] for the weight of the item. There is also an integer _cap_ which is the capacity of the knapsack. This algorithm finds the maximum value subset of the item values so the weights of these items added together is less than or equal to the knapsack capacity weight. Because this is the 0-1 Knapsack Problem, either an item is included in the optimal subset or it is not. 
+
+
+Therefore, the maximum value that can be obtained from n items is max of following two values.
+1) Maximum value obtained by n-1 items and W weight (excluding nth item).
+2) Value of nth item plus maximum value obtained by n-1 items and W minus weight of the nth item (including nth item).
+If weight of nth item is greater than W, then the nth item cannot be included and case 1 is the only possibility.
+It should be noted that the above function computes the same subproblems again and again. See the following recursion tree, K(1, 1) is being evaluated twice. Time complexity of this naive recursive solution is exponential (2^n).
+Since suproblems are evaluated again, this problem has Overlapping Subprolems property. So the 0-1 Knapsack problem has both properties (see this and this) of a dynamic programming problem. Like other typical Dynamic Programming(DP) problems, recomputations of same subproblems can be avoided by constructing a temporary array K[][] in bottom up manner. Following is Dynamic Programming based implementation.
+Time Complexity: O(nW) where n is the number of items and W is the capacity of knapsack.
+
+
+First, we create a 2-dimensional array (i.e. a table) of n + 1 rows and w + 1 columns.
+A row number i represents the set of all the items from rows 1— i. For instance, the values in row 3 assumes that we only have items 1, 2, and 3.
+A column number j represents the weight capacity of our knapsack. Therefore, the values in column 5, for example, assumes that our knapsack can hold 5 weight units.
+Putting everything together, an entry in row i, column j represents the maximum value that can be obtained with items 1, 2, 3 … i, in a knapsack that can hold j weight units.
+Let’s call our table mat for matrix. Therefore, int[][] mat = new int[n + 1][w + 1].
+Step 2:
+We can immediately begin filling some entries in our table: the base cases, for which the solution is trivial. For instance, at row 0, when we have no items to pick from, the maximum value that can be stored in any knapsack must be 0. Similarly, at column 0, for a knapsack which can hold 0 weight units, the maximum value that can be stored in it is 0. (We’re assuming that there are no massless, valuable items.)
+To calculate the maximum value that we can obtain with item i, we first need to compare the weight of item i with the knapsack’s weight capacity. Obviously, if item i weighs more than what the knapsack can hold, we can’t include it, so it does not make sense to perform the calculation. In that case, the solution to this problem is simply the maximum value that we can obtain without item i (i.e. the value in the row above, at the same column).
+Therefore, at row i and column j (which represents the maximum value we can obtain there), we would pick either the maximum value that we can obtain without item i, or the maximum value that we can obtain with item i, whichever is larger.
+
+filter_none
 
 *Indispensable:
 -Real world data
