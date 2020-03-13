@@ -26,3 +26,4 @@ The idea of this solution is to find the largest value of items while still keep
 
 
 The following is a screenshot of the resulting packing list when the _knap.txt_ file included in this repository is run in the program solution:
+![Running](Running.png)
